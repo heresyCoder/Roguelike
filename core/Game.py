@@ -27,7 +27,6 @@ def game_process(self, key):
 
     for x in range(Globals.RENDER_NUM_X):
         for y in range(Globals.RENDER_NUM_Y):
-            #if self.world.map.map[x + x_beg][y + y_beg].on_view:
             self.draw_queue.append(self.world.map.map[x + x_beg][y + y_beg])
 
 

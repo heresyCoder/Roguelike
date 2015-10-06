@@ -1,4 +1,4 @@
-from core import String
+from core.Structures import String
 from pygame.locals import *
 from core import Globals
 
@@ -9,31 +9,31 @@ def load_menu(self):
     self.objects.clear()
     self.draw_queue.clear()
 
-    self.objects.append(String.String('new_game'))
+    self.objects.append(String('new_game'))
     self.objects[0].set_text('Новая игра')
     self.objects[0].x = Globals.RENDER_NUM_X // 2.5
     self.objects[0].y = Globals.RENDER_NUM_Y // 2.5
     self.draw_queue.append(self.objects[0])
 
-    self.objects.append(String.String('continue'))
+    self.objects.append(String('continue'))
     self.objects[1].set_text('Продолжить')
     self.objects[1].x = Globals.RENDER_NUM_X // 2.5
     self.objects[1].y = Globals.RENDER_NUM_Y // 2.5 + 1
     self.draw_queue.append(self.objects[1])
 
-    self.objects.append(String.String('settings'))
+    self.objects.append(String('settings'))
     self.objects[2].set_text('Настройки')
     self.objects[2].x = Globals.RENDER_NUM_X // 2.5
     self.objects[2].y = Globals.RENDER_NUM_Y // 2.5 + 2
     self.draw_queue.append(self.objects[2])
 
-    self.objects.append(String.String('help'))
+    self.objects.append(String('help'))
     self.objects[3].set_text('Помощь')
     self.objects[3].x = Globals.RENDER_NUM_X // 2.5
     self.objects[3].y = Globals.RENDER_NUM_Y // 2.5 + 3
     self.draw_queue.append(self.objects[3])
 
-    self.objects.append(String.String('quit'))
+    self.objects.append(String('quit'))
     self.objects[4].set_text('Выход')
     self.objects[4].x = Globals.RENDER_NUM_X // 2.5
     self.objects[4].y = Globals.RENDER_NUM_Y // 2.5 + 4

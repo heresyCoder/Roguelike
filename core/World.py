@@ -1,12 +1,11 @@
 import random
 # import pickle
-from core import Graphics
-from core import Funcs
+from core.Structures import *
 from pygame.locals import *
 
-# A rectangle on the map. Used to characterize a room.
 # x, y - upper left corner coordinates; w, h - displacement to the lower right
 # corner.
+# A rectangle on the map. Used to characterize a room.
 class Rect(object):
     def __init__(self, x, y, w, h):
         self.x = x
@@ -19,31 +18,6 @@ class Rect(object):
         center_x = (self.x + self.ax) // 2
         center_y = (self.y + self.ay) // 2
         return (center_x, center_y)
-
-
-class Tile(object):
-    def __init__(self, type, blocked):      # ,block_sight = None
-        self.type = type
-        self.blocked  = blocked
-        self.explored = False
-        self.on_view  = False
-
-    def draw(self, game, x, y):
-        Graphics.draw_Tile(self, game, x, y)
-
-
-class Object(object):
-    def __init__(self, type, map, cords):
-        self.type = type
-        self.stand_on = map[cords[0]][cords[1]]
-        map[cords[0]][cords[1]] = self
-        self.blocked = True
-        self.on_view = False
-        self.x = cords[0]
-        self.y = cords[1]
-
-    def draw(self, game, x, y):
-        game.screen.blit(Graphics.textures['player'], Funcs.ind2cord(x, y))
 
 class Map(object):
     def __init__(self, width, height):

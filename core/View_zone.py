@@ -1,5 +1,4 @@
 import math
-from core import Funcs
 from core import Globals
 from core import World
 
@@ -16,6 +15,7 @@ def view(map, object):
 
     di = math.pi * 2 / num_of_lines
 
+    # Local coordinates
     for i in range(num_of_lines):
         angle = di * i
         line_x1 =  math.cos(angle) * Globals.VIEW_RADIUS
@@ -28,7 +28,6 @@ def view(map, object):
         blocked = False
 
         for j in range(line_parts):
-
             point_x = line_dx * j
             point_y = line_dy * j
 
@@ -39,17 +38,22 @@ def view(map, object):
             point_y += object.y
 
             indexes = (point_x, point_y)
+
             if indexes != last_cord:
                 last_cord = indexes
 
                 found_obj = map[indexes[0]][indexes[1]]
                 found_obj.on_view = True
+
+                if type(found_obj) is World.Tile:
+                    found_obj.explored = True
+                else:
+                    found_obj.stand_on.explored = True
+
                 if found_obj.blocked and not type(found_obj) is World.Object:
                     blocked = True
                     break
 
-                if type(found_obj) is World.Tile:
-                    found_obj.explored = True
             if blocked: break
 
 

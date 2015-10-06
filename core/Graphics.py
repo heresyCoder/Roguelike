@@ -9,7 +9,8 @@ def get_color(name):
         'player': (126, 167, 137),
         'npc': (175, 131, 159),
         'dark_wall': (76, 102, 140),
-        'dark_ground': (45, 72, 111)
+        'dark_ground': (45, 72, 111),
+        'highlight': (70, 70, 70)
     }
 
     return colors[name]
@@ -20,27 +21,43 @@ def render_text(text, color):
 
 bg_color = (0, 0, 0)
 textures = {}
-textures['player'] = render_text('@', get_color('player'))
-textures['npc']    = render_text('@', get_color('npc'))
-textures['wall']   = render_text('#', get_color('dark_wall'))
-textures['ground'] = render_text('.', get_color('dark_ground'))
+textures['player']   = render_text('@', get_color('player'))
+textures['npc']      = render_text('@', get_color('npc'))
+textures['wall']     = render_text('#', get_color('dark_wall'))
+textures['wall_l']   = render_text('#', Funcs.sum_tuples(get_color('dark_wall'), get_color('highlight')))
+textures['ground']   = render_text('.', get_color('dark_ground'))
+textures['ground_l'] = render_text('.', Funcs.sum_tuples(get_color('dark_ground'), get_color('highlight')))
 
 def draw_Tile(Tile, game, x, y):
 
     cords = Funcs.ind2cord(x, y)
-    game.screen.blit(textures[Tile.type], cords)
+    if Tile.on_view:
+        game.screen.blit(textures[Tile.type + '_l'], cords)
+    else:
+        game.screen.blit(textures[Tile.type], cords)
 
 def draw_all(self):
+
     if self.link == 'main_menu':
         for obj in self.draw_queue:
             obj.draw(self)
 
     elif self.link == 'game':
+        from core.Structures import Tile
         # print(len(self.draw_queue))
         if self.draw_queue:
             for i in range(Globals.RENDER_NUM_X):
                 for j in range(Globals.RENDER_NUM_Y):
-                    if self.draw_queue[i * Globals.RENDER_NUM_Y + j].on_view:
-                        self.draw_queue[i * Globals.RENDER_NUM_Y + j].draw(self, i, j)
+                    map_obj = self.draw_queue[i * Globals.RENDER_NUM_Y + j]
+                    if map_obj.on_view:
+                        map_obj.draw(self, i, j)
+                        map_obj.on_view = False
+                    else:
+                        if type(map_obj) is Tile:
+                            if map_obj.explored:
+                                map_obj.draw(self, i, j)
+                        else:
+                            if map_obj.stand_on.explored:
+                                map_obj.stand_on.draw(self, i, j)
 
     self.draw_queue.clear()

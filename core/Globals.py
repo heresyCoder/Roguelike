@@ -30,8 +30,8 @@ RENDER_NUM_X          = SCREEN_WIDTH  // FONT_X // 2
 RENDER_NUM_Y          = SCREEN_HEIGHT // FONT_Y
 NUM_CELLS_ON_SCREEN   = RENDER_NUM_X * RENDER_NUM_Y
 
-FIELD_NUM_X = 100
-FIELD_NUM_Y = 100
+FIELD_NUM_X = int(Config.get('World', 'FIELD_NUM_X'))
+FIELD_NUM_Y = int(Config.get('World', 'FIELD_NUM_Y'))
 
 K_NONE      = 0b1
 K_MENU      = 0b10
