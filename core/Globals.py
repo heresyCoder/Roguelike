@@ -13,7 +13,7 @@ SCREEN_WIDTH        = int(Config.get('Main', 'SCREEN_WIDTH'))
 SCREEN_HEIGHT       = int(Config.get('Main', 'SCREEN_HEIGHT'))
 FRAME_RATE          = int(Config.get('Main', 'FRAME_RATE'))
 
-VIEW_RADIUS         = 3
+VIEW_RADIUS         = 5
 
 # FONT_X                  # Width of one symbol
 # FONT_Y                  # Height of one symbol

@@ -16,7 +16,6 @@ def view(map, object):
 
     di = math.pi * 2 / num_of_lines
 
-    # Local coordinates
     for i in range(num_of_lines):
         angle = di * i
         line_x1 =  math.cos(angle) * Globals.VIEW_RADIUS
