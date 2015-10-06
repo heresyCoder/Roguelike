@@ -15,6 +15,14 @@ def ind2cord(ix, iy):                       # Converts indexes of cells to real 
 #     iy = cy // Globals.FONT_Y
 #     return ix, iy
 
+def sum_tuples(tuple1, tuple2):
+    t1 = list(tuple1)
+    t2 = list(tuple2)
+
+    for i in range(len(t1)):
+        t2[i] += t1[i]
+    return tuple(t2)
+
 def event_handler(events):
 
     for event in events:
@@ -42,4 +50,5 @@ def event_handler(events):
                 return Globals.K_NAVIGATE, event.key
 
     return Globals.K_NONE, None
+
 
