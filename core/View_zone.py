@@ -7,11 +7,11 @@ def view(map, object):
     # Searching for walls in circle. Using lines, made from player, to VIEW_RADIUS.
     # Whole circle divided for num_of_lines. Each line searching for visible blocks.
 
-    num_of_lines = Globals.VIEW_RADIUS * 20
+    num_of_lines = Globals.VIEW_RADIUS * 10
 
     # Each line divided by line_parts. Points on the line would be checked for block ownership
 
-    line_parts = Globals.VIEW_RADIUS * 3
+    line_parts = Globals.VIEW_RADIUS * 10
 
     di = math.pi * 2 / num_of_lines
 
