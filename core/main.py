@@ -28,7 +28,7 @@ class Game(object):
                     if   self.link == 'main_menu':
                         Main_menu.load_menu(self)
                     elif self.link == 'game':
-                        pass
+                        g.load_game(self)
                     on_load = False
 
                 self.link, on_load = self.scenes[self.link](self, flags_n_key)

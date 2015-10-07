@@ -1,8 +1,15 @@
 from core import Globals
 from core import View_zone
+from logic.Funcs import *
+from logic import EI
 #import World
 from pygame.locals import *
 from core import Graphics
+
+def load_game(game):
+
+    key = Globals.K_NAVIGATE, None
+    game_process(game, key)
 
 def game_process(self, key):
 
@@ -12,6 +19,7 @@ def game_process(self, key):
 
     move(self.world.player, key[1], self.world)
     player_cord = self.world.player.x, self.world.player.y
+    EI.rand_move(self.world.npc, self.world)
 
     x_beg = player_cord[0] - Globals.RENDER_NUM_X // 2
     y_beg = player_cord[1] - Globals.RENDER_NUM_Y // 2
@@ -73,15 +81,3 @@ def move(object, key, world):
     object.x = obj_cords[0]
     object.y = obj_cords[1]
 
-def is_free(world, x, y):
-    free = True
-    for obj in world.objects[1:]:
-        free &= x != obj.x or y != obj.y
-    free &= x < world.map.width
-    free &= x >= 0
-    free &= y < world.map.height
-    free &= y >= 0
-    if free:
-        free &= not world.map.map[x][y].blocked
-
-    return free
