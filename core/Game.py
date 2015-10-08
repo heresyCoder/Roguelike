@@ -13,17 +13,24 @@ def load_game(game):
 
 def game_process(self, key):
 
-    if not key[0] & Globals.K_NAVIGATE: return 'game', False
+    if not (key[0] & Globals.K_NAVIGATE or key[0] & Globals.E_RESIZE): return 'game', False
 
     self.screen.fill(Graphics.bg_color)
 
-    move(self.world.player, key[1], self.world)
-    player_cord = self.world.player.x, self.world.player.y
-    EI.rand_move(self.world.npc, self.world)
+    if not key[0] & Globals.E_RESIZE:
+        move(self.world.player, key[1], self.world)
+        EI.rand_move(self.world.npc, self.world)
 
+    View_zone.view(self.world.map.map, self.world.player)
+
+    if Globals.FIELD_NUM_X < Globals.RENDER_NUM_X: Globals.RENDER_NUM_X = Globals.FIELD_NUM_X
+    if Globals.FIELD_NUM_Y < Globals.RENDER_NUM_Y: Globals.RENDER_NUM_Y = Globals.FIELD_NUM_Y
+
+    player_cord = self.world.player.x, self.world.player.y
     x_beg = player_cord[0] - Globals.RENDER_NUM_X // 2
     y_beg = player_cord[1] - Globals.RENDER_NUM_Y // 2
     print(player_cord)
+    #print('x, y beg:', x_beg, y_beg)
 
     if x_beg < 0: x_beg = 0
     elif x_beg + Globals.RENDER_NUM_X > Globals.FIELD_NUM_X: x_beg = Globals.FIELD_NUM_X - Globals.RENDER_NUM_X
@@ -31,7 +38,6 @@ def game_process(self, key):
     if y_beg < 0: y_beg = 0
     elif y_beg + Globals.RENDER_NUM_Y > Globals.FIELD_NUM_Y: y_beg = Globals.FIELD_NUM_Y - Globals.RENDER_NUM_Y
 
-    View_zone.view(self.world.map.map, self.world.player)
 
     for x in range(Globals.RENDER_NUM_X):
         for y in range(Globals.RENDER_NUM_Y):

@@ -9,11 +9,11 @@ def ind2cord(ix, iy):                       # Converts indexes of cells to real 
     cy = iy * Globals.FONT_Y
     return cx, cy
 
-# def cord2ind(cx, cy):
-#
-#     ix = cx // (Globals.FONT_X * 2)
-#     iy = cy // Globals.FONT_Y
-#     return ix, iy
+def cord2ind(cx, cy):
+
+    ix = cx // (Globals.FONT_X * 2)
+    iy = cy // Globals.FONT_Y
+    return ix, iy
 
 def sum_tuples(tuple1, tuple2):
     t1 = list(tuple1)
@@ -48,6 +48,15 @@ def event_handler(events):
                 or event.key == K_q:
 
                 return Globals.K_NAVIGATE, event.key
+
+        elif event.type == VIDEORESIZE:
+
+            Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT = event.dict['size']
+            Globals.RENDER_NUM_X = Globals.SCREEN_WIDTH  // Globals.FONT_X // 2
+            Globals.RENDER_NUM_Y = Globals.SCREEN_HEIGHT // Globals.FONT_Y
+            #print(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT)
+            #print( Globals.RENDER_NUM_X,  Globals.RENDER_NUM_Y)
+            return Globals.E_RESIZE, None
 
     return Globals.K_NONE, None
 

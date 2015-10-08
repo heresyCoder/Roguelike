@@ -46,6 +46,8 @@ def draw_all(self):
         from core.Structures import Tile
         # print(len(self.draw_queue))
         if self.draw_queue:
+            if Globals.FIELD_NUM_X < Globals.RENDER_NUM_X: Globals.RENDER_NUM_X = Globals.FIELD_NUM_X
+            if Globals.FIELD_NUM_Y < Globals.RENDER_NUM_Y: Globals.RENDER_NUM_Y = Globals.FIELD_NUM_Y
             for i in range(Globals.RENDER_NUM_X):
                 for j in range(Globals.RENDER_NUM_Y):
                     map_obj = self.draw_queue[i * Globals.RENDER_NUM_Y + j]

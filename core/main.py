@@ -8,7 +8,7 @@ from core import Globals
 
 class Game(object):
     def __init__(self):
-        self.screen = pygame.display.set_mode((Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT))
+        self.screen = pygame.display.set_mode((Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT), pygame.RESIZABLE)
         self.world = World.World(Globals.FIELD_NUM_X, Globals.FIELD_NUM_Y)
         self.scenes = {'main_menu': Main_menu.menu_process, 'game': g.game_process}
         self.link = 'main_menu'
@@ -31,6 +31,8 @@ class Game(object):
                         g.load_game(self)
                     on_load = False
 
+                if flags_n_key[0] & Globals.E_RESIZE:
+                    self.screen = pygame.display.set_mode((Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT), pygame.RESIZABLE)
                 self.link, on_load = self.scenes[self.link](self, flags_n_key)
                 Graphics.draw_all(self)
                 pygame.display.flip()

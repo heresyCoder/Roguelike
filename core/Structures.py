@@ -54,9 +54,9 @@ class String(object):           # Never update cords or text if last wasn't drew
         self.y = y
         self.attr_changed = True
 
-    def set_color(self, r, g, b):
+    def set_color(self, color):
 
-        self.color = r, g, b
+        self.color = color
         self.attr_changed = True
 
     def get_size(self):
