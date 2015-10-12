@@ -1,7 +1,5 @@
-# import sys
 import pygame
 import configparser
-# from pygame.locals import *
 
 pygame.init()
 pygame.display.set_caption('SOMMETHING')

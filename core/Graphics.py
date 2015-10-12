@@ -15,18 +15,14 @@ def get_color(name):
 
     return colors[name]
 
-def render_text(text, color):
-    rend_text = Globals.FONT.render(text, True, color)
-    return rend_text
-
 bg_color = (0, 0, 0)
 textures = {}
-textures['player']   = render_text('@', get_color('player'))
-textures['npc']      = render_text('@', get_color('npc'))
-textures['wall']     = render_text('#', get_color('dark_wall'))
-textures['wall_l']   = render_text('#', Funcs.sum_tuples(get_color('dark_wall'), get_color('highlight')))
-textures['ground']   = render_text('.', get_color('dark_ground'))
-textures['ground_l'] = render_text('.', Funcs.sum_tuples(get_color('dark_ground'), get_color('highlight')))
+# textures['player']   = Globals.FONT.render('@', True, get_color('player'))
+# textures['npc']      = Globals.FONT.render('@', True, get_color('npc'))
+# textures['wall']     = Globals.FONT.render('#', True, get_color('dark_wall'))
+# textures['wall_l']   = Globals.FONT.render('#', True, Funcs.sum_tuples(get_color('dark_wall'), get_color('highlight')))
+# textures['ground']   = Globals.FONT.render('.', True, get_color('dark_ground'))
+# textures['ground_l'] = Globals.FONT.render('.', True, Funcs.sum_tuples(get_color('dark_ground'), get_color('highlight')))
 
 def draw_Tile(Tile, game, x, y):
 

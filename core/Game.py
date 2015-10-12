@@ -1,12 +1,19 @@
 from core import Globals
 from core import View_zone
-from logic.Funcs import *
+from core.Funcs import sum_tuples
+from logic.Funcs import is_free
 from logic import EI
-#import World
 from pygame.locals import *
-from core import Graphics
+from core import Graphics as Gr
 
 def load_game(game):
+
+    Gr.textures['player']   = Globals.FONT.render('@', True, Gr.get_color('player'))
+    Gr.textures['npc']      = Globals.FONT.render('@', True, Gr.get_color('npc'))
+    Gr.textures['wall']     = Globals.FONT.render('#', True, Gr.get_color('dark_wall'))
+    Gr.textures['wall_l']   = Globals.FONT.render('#', True, sum_tuples(Gr.get_color('dark_wall'), Gr.get_color('highlight')))
+    Gr.textures['ground']   = Globals.FONT.render('.', True, Gr.get_color('dark_ground'))
+    Gr.textures['ground_l'] = Globals.FONT.render('.', True, sum_tuples(Gr.get_color('dark_ground'), Gr.get_color('highlight')))
 
     key = Globals.K_NAVIGATE, None
     game_process(game, key)
@@ -15,7 +22,7 @@ def game_process(self, key):
 
     if not (key[0] & Globals.K_NAVIGATE or key[0] & Globals.E_RESIZE): return 'game', False
 
-    self.screen.fill(Graphics.bg_color)
+    self.screen.fill(Gr.bg_color)
 
     if not key[0] & Globals.E_RESIZE:
         move(self.world.player, key[1], self.world)

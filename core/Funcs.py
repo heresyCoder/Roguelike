@@ -9,11 +9,11 @@ def ind2cord(ix, iy):                       # Converts indexes of cells to real 
     cy = iy * Globals.FONT_Y
     return cx, cy
 
-def cord2ind(cx, cy):
-
-    ix = cx // (Globals.FONT_X * 2)
-    iy = cy // Globals.FONT_Y
-    return ix, iy
+# def cord2ind(cx, cy):
+#
+#     ix = cx // (Globals.FONT_X * 2)
+#     iy = cy // Globals.FONT_Y
+#     return ix, iy
 
 def sum_tuples(tuple1, tuple2):
     t1 = list(tuple1)
