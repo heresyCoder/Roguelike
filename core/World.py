@@ -98,6 +98,8 @@ class World(object):
         self.textures = {}
         self.map = Map(map_width, map_height)
         self.map.make_map()
+        self.render_x = 0
+        self.render_y = 0
 
         self.player = Object('player', self.map.map, self.find_free())
         self.npc = Object('npc', self.map.map, self.find_free())
