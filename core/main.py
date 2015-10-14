@@ -9,6 +9,8 @@ from core import Globals
 class Game(object):
     def __init__(self):
         self.screen = pygame.display.set_mode((Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT), pygame.RESIZABLE)
+        self.render_map_x = self.screen.get_width()   // Globals.FONT_X // 2
+        self.render_map_y = self.screen.get_height()  // Globals.FONT_Y
         self.world = None
         self.scenes = {'main_menu': Main_menu.menu_process, 'game': g.game_process}
         self.link = 'main_menu'
@@ -25,13 +27,15 @@ class Game(object):
 
             if not flags_n_key[0] & Globals.K_NONE or on_load:
                 if flags_n_key[0] & Globals.E_RESIZE:
-                    self.screen = pygame.display.set_mode((Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT), pygame.RESIZABLE)
-                    self.screen.fill(Graphics.bg_color)
+                    self.screen = pygame.display.set_mode(flags_n_key[1], pygame.RESIZABLE)
+                    self.render_map_x = self.screen.get_width()   // Globals.FONT_X // 2
+                    self.render_map_y = self.screen.get_height()  // Globals.FONT_Y
+                    self.screen.fill(Globals.BG_COLOR)
 
                 if on_load:
                     self.objects.clear()
                     self.draw_queue.clear()
-                    self.screen.fill(Graphics.bg_color)
+                    self.screen.fill(Globals.BG_COLOR)
 
                     if   self.link == 'main_menu':
                         #Main_menu.load_menu(self)
