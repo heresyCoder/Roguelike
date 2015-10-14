@@ -1,6 +1,5 @@
 from core import Globals
 import pygame
-import sys
 from pygame.locals import *
 
 def ind2cord(ix, iy):                       # Converts indexes of cells to real screen coordinates
@@ -26,12 +25,8 @@ def sum_tuples(tuple1, tuple2):
 def event_handler(events):
 
     for event in events:
-        if event.type == pygame.KEYDOWN:                # Changed. Pretty the same, but simpler
-            if event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit(0)
-
-            elif   event.key == K_w or event.key == K_SPACE:
+        if event.type == pygame.KEYDOWN:
+            if   event.key == K_w or event.key == K_SPACE:
 
                 return Globals.K_MENU | Globals.K_NAVIGATE, event.key
 
@@ -40,22 +35,21 @@ def event_handler(events):
                 return Globals.K_MENU, event.key
 
             elif   event.key == K_e \
-                or event.key == K_d \
-                or event.key == K_c \
-                or event.key == K_x \
-                or event.key == K_z \
-                or event.key == K_a \
-                or event.key == K_q:
+                    or event.key == K_d \
+                    or event.key == K_c \
+                    or event.key == K_x \
+                    or event.key == K_z \
+                    or event.key == K_a \
+                    or event.key == K_q:
 
                 return Globals.K_NAVIGATE, event.key
 
+            elif event.key == K_ESCAPE:
+
+                return Globals.K_QUIT, None
+
         elif event.type == VIDEORESIZE:
 
-            # Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT = event.dict['size']
-            # Globals.RENDER_NUM_X = Globals.SCREEN_WIDTH  // Globals.FONT_X // 2
-            # Globals.RENDER_NUM_Y = Globals.SCREEN_HEIGHT // Globals.FONT_Y
-            #print(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT)
-            #print( Globals.RENDER_NUM_X,  Globals.RENDER_NUM_Y)
             return Globals.E_RESIZE, event.dict['size']
 
     return Globals.K_NONE, None

@@ -1,5 +1,5 @@
 import random
-# import pickle
+import pickle
 from core.Structures import *
 from pygame.locals import *
 
@@ -117,8 +117,11 @@ class World(object):
             if self.is_free(rand_x, rand_y):
                 return (rand_x, rand_y)
 
-# def save_world(world):
-#
-#     pickle.
+def save_world(world):
+    with open('./saves/1.pickle', 'wb') as f:
+        pickle.dump(world, f)
 
+def load_world():
+    with open('./saves/1.pickle', 'rb') as f:
+        return pickle.load(f)
 

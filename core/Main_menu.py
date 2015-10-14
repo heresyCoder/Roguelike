@@ -28,6 +28,7 @@ def menu_process(game, key):
 
     global target_i
     if key[0] & Globals.E_RESIZE:
+        game.objects.clear()
         load_menu(game)
         if target_i is None: target_i = 0
 
@@ -67,7 +68,10 @@ def menu_process(game, key):
             target_i = None
             return 'game', True
 
-        elif target_i == 1: pass
+        elif target_i == 1:
+            target_i = None
+            return 'continue', True
+
         elif target_i == 2: pass
         elif target_i == 3: pass
         elif target_i == 4: pass

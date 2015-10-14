@@ -1,4 +1,5 @@
 import pygame
+import sys
 from core import Funcs
 from core import Graphics
 from core import World
@@ -26,6 +27,12 @@ class Game(object):
             flags_n_key = Funcs.event_handler(pygame.event.get())
 
             if not flags_n_key[0] & Globals.K_NONE or on_load:
+
+                if flags_n_key[0] & Globals.K_QUIT:
+                    World.save_world(self.world)
+                    pygame.quit()
+                    sys.exit(0)
+
                 if flags_n_key[0] & Globals.E_RESIZE:
                     self.screen = pygame.display.set_mode(flags_n_key[1], pygame.RESIZABLE)
                     self.render_map_x = self.screen.get_width()   // Globals.FONT_X // 2
@@ -40,6 +47,11 @@ class Game(object):
                     if   self.link == 'main_menu':
                         #Main_menu.load_menu(self)
                         pass
+
+                    if self.link == 'continue':
+                        self.link = 'game'
+                        self.world = World.load_world()
+                        g.load_game(self)
 
                     elif self.link == 'game':
                         Main_menu.text_screen(self, 'generating...', (255, 255, 255))

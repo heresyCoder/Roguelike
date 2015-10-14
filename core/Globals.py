@@ -31,4 +31,5 @@ FONT_X, FONT_Y = FONT.size("B")
 K_NONE      = 0b1
 K_MENU      = 0b10
 K_NAVIGATE  = 0b100
-E_RESIZE    = 0b1000
+K_QUIT      = 0b1000
+E_RESIZE    = 0b10000

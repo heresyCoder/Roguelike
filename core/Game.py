@@ -15,7 +15,7 @@ def load_game(game):
     Gr.textures['ground']   = Globals.FONT.render('.', True, Gr.get_color('dark_ground'))
     Gr.textures['ground_l'] = Globals.FONT.render('.', True, sum_tuples(Gr.get_color('dark_ground'), Gr.get_color('highlight')))
 
-    key = Globals.K_NAVIGATE, None
+    key = Globals.E_RESIZE, None
     game_process(game, key)
 
 def game_process(game, key):
@@ -30,8 +30,8 @@ def game_process(game, key):
 
     View_zone.view(game.world.map.map, game.world.player)
 
-    if game.world.map.width  < game.render_map_x: game.render_map_x = game.map.width
-    if game.world.map.height < game.render_map_y: game.render_map_y = game.map.height
+    if game.world.map.width  < game.render_map_x: game.render_map_x = game.world.map.width
+    if game.world.map.height < game.render_map_y: game.render_map_y = game.world.map.height
 
     player_cord = game.world.player.x, game.world.player.y
     x_beg = player_cord[0] - game.render_map_x // 2
