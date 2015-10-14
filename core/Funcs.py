@@ -51,12 +51,12 @@ def event_handler(events):
 
         elif event.type == VIDEORESIZE:
 
-            Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT = event.dict['size']
-            Globals.RENDER_NUM_X = Globals.SCREEN_WIDTH  // Globals.FONT_X // 2
-            Globals.RENDER_NUM_Y = Globals.SCREEN_HEIGHT // Globals.FONT_Y
+            # Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT = event.dict['size']
+            # Globals.RENDER_NUM_X = Globals.SCREEN_WIDTH  // Globals.FONT_X // 2
+            # Globals.RENDER_NUM_Y = Globals.SCREEN_HEIGHT // Globals.FONT_Y
             #print(Globals.SCREEN_WIDTH, Globals.SCREEN_HEIGHT)
             #print( Globals.RENDER_NUM_X,  Globals.RENDER_NUM_Y)
-            return Globals.E_RESIZE, None
+            return Globals.E_RESIZE, event.dict['size']
 
     return Globals.K_NONE, None
 

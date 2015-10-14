@@ -43,5 +43,5 @@ class String(object):
 
     def make_patch(self, game):
         patch = pygame.Surface((len(self.text) * Globals.FONT_X, Globals.FONT_Y))
-        patch.fill(Graphics.bg_color)
+        patch.fill(Globals.BG_COLOR)
         game.screen.blit(patch, ind2cord(self.x, self.y))

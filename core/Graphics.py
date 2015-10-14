@@ -1,7 +1,5 @@
-# import pygame, sys
 from core import Funcs
 from core import Globals
-# from pygame.locals import *
 
 def get_color(name):
     colors = {
@@ -15,14 +13,7 @@ def get_color(name):
 
     return colors[name]
 
-bg_color = (0, 0, 0)
 textures = {}
-# textures['player']   = Globals.FONT.render('@', True, get_color('player'))
-# textures['npc']      = Globals.FONT.render('@', True, get_color('npc'))
-# textures['wall']     = Globals.FONT.render('#', True, get_color('dark_wall'))
-# textures['wall_l']   = Globals.FONT.render('#', True, Funcs.sum_tuples(get_color('dark_wall'), get_color('highlight')))
-# textures['ground']   = Globals.FONT.render('.', True, get_color('dark_ground'))
-# textures['ground_l'] = Globals.FONT.render('.', True, Funcs.sum_tuples(get_color('dark_ground'), get_color('highlight')))
 
 def draw_Tile(Tile, game, x, y):
 
@@ -32,30 +23,32 @@ def draw_Tile(Tile, game, x, y):
     else:
         game.screen.blit(textures[Tile.type], cords)
 
-def draw_all(self):
+def draw_all(game):
 
-    if self.link == 'main_menu':
-        for obj in self.draw_queue:
-            obj.draw(self)
+    if game.link == 'main_menu':
+        for obj in game.draw_queue:
+            obj.draw(game)
 
-    elif self.link == 'game':
+    elif game.link == 'game':
         from core.Structures import Tile
-        # print(len(self.draw_queue))
-        if self.draw_queue:
-            if Globals.FIELD_NUM_X < Globals.RENDER_NUM_X: Globals.RENDER_NUM_X = Globals.FIELD_NUM_X
-            if Globals.FIELD_NUM_Y < Globals.RENDER_NUM_Y: Globals.RENDER_NUM_Y = Globals.FIELD_NUM_Y
-            for i in range(Globals.RENDER_NUM_X):
-                for j in range(Globals.RENDER_NUM_Y):
-                    map_obj = self.draw_queue[i * Globals.RENDER_NUM_Y + j]
+
+        if game.draw_queue:
+            if game.world.map.width  < game.render_map_x: game.render_map_x = game.world.map.width
+            if game.world.map.height < game.render_map_y: game.render_map_y = game.world.map.height
+
+            for i in range(game.render_map_x):
+                for j in range(game.render_map_y):
+                    map_obj = game.draw_queue[i * game.render_map_y + j]
+
                     if map_obj.on_view:
-                        map_obj.draw(self, i, j)
+                        map_obj.draw(game, i, j)
                         map_obj.on_view = False
                     else:
                         if type(map_obj) is Tile:
                             if map_obj.explored:
-                                map_obj.draw(self, i, j)
+                                map_obj.draw(game, i, j)
                         else:
                             if map_obj.stand_on.explored:
-                                map_obj.stand_on.draw(self, i, j)
+                                map_obj.stand_on.draw(game, i, j)
 
-    self.draw_queue.clear()
+    game.draw_queue.clear()

@@ -18,37 +18,37 @@ def load_game(game):
     key = Globals.K_NAVIGATE, None
     game_process(game, key)
 
-def game_process(self, key):
+def game_process(game, key):
 
     if not (key[0] & Globals.K_NAVIGATE or key[0] & Globals.E_RESIZE): return 'game', False
 
-    self.screen.fill(Gr.bg_color)
+    game.screen.fill(Globals.BG_COLOR)
 
     if not key[0] & Globals.E_RESIZE:
-        move(self.world.player, key[1], self.world)
-        EI.rand_move(self.world.npc, self.world)
+        move(game.world.player, key[1], game.world)
+        EI.rand_move(game.world.npc, game.world)
 
-    View_zone.view(self.world.map.map, self.world.player)
+    View_zone.view(game.world.map.map, game.world.player)
 
-    if Globals.FIELD_NUM_X < Globals.RENDER_NUM_X: Globals.RENDER_NUM_X = Globals.FIELD_NUM_X
-    if Globals.FIELD_NUM_Y < Globals.RENDER_NUM_Y: Globals.RENDER_NUM_Y = Globals.FIELD_NUM_Y
+    if game.world.map.width  < game.render_map_x: game.render_map_x = game.map.width
+    if game.world.map.height < game.render_map_y: game.render_map_y = game.map.height
 
-    player_cord = self.world.player.x, self.world.player.y
-    x_beg = player_cord[0] - Globals.RENDER_NUM_X // 2
-    y_beg = player_cord[1] - Globals.RENDER_NUM_Y // 2
+    player_cord = game.world.player.x, game.world.player.y
+    x_beg = player_cord[0] - game.render_map_x // 2
+    y_beg = player_cord[1] - game.render_map_y // 2
     print(player_cord)
     #print('x, y beg:', x_beg, y_beg)
 
     if x_beg < 0: x_beg = 0
-    elif x_beg + Globals.RENDER_NUM_X > Globals.FIELD_NUM_X: x_beg = Globals.FIELD_NUM_X - Globals.RENDER_NUM_X
+    elif x_beg + game.render_map_x > game.world.map.width: x_beg = game.world.map.width - game.render_map_x
 
     if y_beg < 0: y_beg = 0
-    elif y_beg + Globals.RENDER_NUM_Y > Globals.FIELD_NUM_Y: y_beg = Globals.FIELD_NUM_Y - Globals.RENDER_NUM_Y
+    elif y_beg + game.render_map_y > game.world.map.height: y_beg = game.world.map.height - game.render_map_y
 
 
-    for x in range(Globals.RENDER_NUM_X):
-        for y in range(Globals.RENDER_NUM_Y):
-            self.draw_queue.append(self.world.map.map[x + x_beg][y + y_beg])
+    for x in range(game.render_map_x):
+        for y in range(game.render_map_y):
+            game.draw_queue.append(game.world.map.map[x + x_beg][y + y_beg])
 
 
     return 'game', False
