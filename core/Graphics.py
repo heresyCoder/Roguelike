@@ -33,12 +33,12 @@ def draw_all(game):
         from core.Structures import Tile
 
         if game.draw_queue:
-            if game.world.map.width  < game.render_map_x: game.render_map_x = game.world.map.width
-            if game.world.map.height < game.render_map_y: game.render_map_y = game.world.map.height
+            if game.world.map.width  < game.world.render_x: game.world.render_x = game.world.map.width
+            if game.world.map.height < game.world.render_y: game.world.render_y = game.world.map.height
 
-            for i in range(game.render_map_x):
-                for j in range(game.render_map_y):
-                    map_obj = game.draw_queue[i * game.render_map_y + j]
+            for i in range(game.world.render_x):
+                for j in range(game.world.render_y):
+                    map_obj = game.draw_queue[i * game.world.render_y + j]
 
                     if map_obj.on_view:
                         map_obj.draw(game, i, j)

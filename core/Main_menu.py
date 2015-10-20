@@ -6,19 +6,19 @@ target_i = None
 
 def load_menu(game):
 
-    game.objects.append(String('new_game', 'Новая игра', (4, game.render_map_y // 2.5), (255, 255, 255)))
+    game.objects.append(String('new_game', 'Новая игра', (4, game.render_y // 2.5), (255, 255, 255)))
     game.draw_queue.append(game.objects[0])
 
-    game.objects.append(String('continue', 'Продолжить', (4, game.render_map_y // 2.5 + 1), (255, 255, 255)))
+    game.objects.append(String('continue', 'Продолжить', (4, game.render_y // 2.5 + 1), (255, 255, 255)))
     game.draw_queue.append(game.objects[1])
 
-    game.objects.append(String('settings', 'Настройки', (4, game.render_map_y // 2.5 + 2), (255, 255, 255)))
+    game.objects.append(String('settings', 'Настройки', (4, game.render_y // 2.5 + 2), (255, 255, 255)))
     game.draw_queue.append(game.objects[2])
 
-    game.objects.append(String('help', 'Помощь', (4, game.render_map_y // 2.5 + 3), (255, 255, 255)))
+    game.objects.append(String('help', 'Помощь', (4, game.render_y // 2.5 + 3), (255, 255, 255)))
     game.draw_queue.append(game.objects[3])
 
-    game.objects.append(String('quit', 'Выход', (4, game.render_map_y // 2.5 + 4), (255, 255, 255)))
+    game.objects.append(String('quit', 'Выход', (4, game.render_y // 2.5 + 4), (255, 255, 255)))
     game.draw_queue.append(game.objects[4])
 
 
@@ -79,5 +79,5 @@ def menu_process(game, key):
     return 'main_menu', False
 
 def text_screen(game, text, color):
-    txt = String('', text, (game.render_map_x // 4 + len(text) // 2, game.render_map_y // 2), color)
+    txt = String('', text, (game.render_x // 2 + len(text) // 2, game.render_y // 2), color)
     txt.draw(game)

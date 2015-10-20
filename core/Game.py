@@ -24,30 +24,34 @@ def game_process(game, key):
 
     game.screen.fill(Globals.BG_COLOR)
 
-    if not key[0] & Globals.E_RESIZE:
+    if key[0] & Globals.E_RESIZE:
+        game.world.render_x = game.render_x // 2 - 5
+        game.world.render_y = game.render_y - 3
+
+    else:
         move(game.world.player, key[1], game.world)
         EI.rand_move(game.world.npc, game.world)
 
     View_zone.view(game.world.map.map, game.world.player)
 
-    if game.world.map.width  < game.render_map_x: game.render_map_x = game.world.map.width
-    if game.world.map.height < game.render_map_y: game.render_map_y = game.world.map.height
+    if game.world.map.width  < game.world.render_x: game.world.render_x = game.world.map.width
+    if game.world.map.height < game.world.render_y: game.world.render_y = game.world.map.height
 
     player_cord = game.world.player.x, game.world.player.y
-    x_beg = player_cord[0] - game.render_map_x // 2
-    y_beg = player_cord[1] - game.render_map_y // 2
+    x_beg = player_cord[0] - game.world.render_x // 2
+    y_beg = player_cord[1] - game.world.render_y // 2
     print(player_cord)
     #print('x, y beg:', x_beg, y_beg)
 
     if x_beg < 0: x_beg = 0
-    elif x_beg + game.render_map_x > game.world.map.width: x_beg = game.world.map.width - game.render_map_x
+    elif x_beg + game.world.render_x > game.world.map.width: x_beg = game.world.map.width - game.world.render_x
 
     if y_beg < 0: y_beg = 0
-    elif y_beg + game.render_map_y > game.world.map.height: y_beg = game.world.map.height - game.render_map_y
+    elif y_beg + game.world.render_y > game.world.map.height: y_beg = game.world.map.height - game.world.render_y
 
 
-    for x in range(game.render_map_x):
-        for y in range(game.render_map_y):
+    for x in range(game.world.render_x):
+        for y in range(game.world.render_y):
             game.draw_queue.append(game.world.map.map[x + x_beg][y + y_beg])
 
 
