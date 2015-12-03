@@ -24,9 +24,9 @@ def game_process(game, key):
 
     game.screen.fill(Globals.BG_COLOR)
 
-    if key[0] & Globals.E_RESIZE:
-        game.world.render_x = game.render_x // 2 - 5
-        game.world.render_y = game.render_y - 3
+    if key[0] & Globals.E_RESIZE:                   # Space for GUI adds here
+        game.world.render_x = game.render_x // 2
+        game.world.render_y = game.render_y
 
     else:
         move(game.world.player, key[1], game.world)

@@ -29,16 +29,13 @@ class Object(object):
 
 
 class String(object):
-
     def __init__(self, name, text, cords, color):
-
         self.name = name
         self.x, self.y = cords
         self.color = color
         self.text = text
 
     def draw(self, game):
-
         game.screen.blit(Globals.FONT.render(self.text, True, self.color), ind2cord(self.x, self.y))
 
     def make_patch(self, game):
